@@ -1,4 +1,5 @@
 # 项目环境搭建
+- app中放一些全局的配置
 - npm init
 - npm install koa
 - npm i nodemon -D(利用dodemon启动，实现实时更新) 配置脚本  "start":"nodemon ./src/main.js"
@@ -8,3 +9,7 @@
 - npm install koa-router
 # 解析Json数据
 - npm install koa-bodyparser
+# 数据库选择
+- npm install mysql2
+# JWT
+- npm install jsonwebtoken

@@ -1,12 +1,24 @@
 const koa  = require('koa');
 const bodyParser = require('koa-bodyparser')
-const {userRouter} = require('../router/userRouter')
+const errorHandle = require('./errorHandle')
+const getDirFile = require('../utils/getDirFile')
 const app = new koa();
 
-app.use(bodyParser())
+const path = require('path')
+const upDir =  path.resolve(__dirname, '..')
 
-app.use(userRouter.routes())
-app.use(userRouter.allowedMethods())
+const files=  getDirFile(upDir)
+app.use(bodyParser());
+//获取为路由的文件并循环注册
+files.forEach(item=>{
+    let  reg = /(Router\.js)$/
+    if(reg.test(item)){
+        const router = require(item)
+        app.use(router.routes())
+        app.use(router.allowedMethods())
+    }
+})
+app.on('error',errorHandle)
 
 
 module.exports = app;

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let result = [
+    {
+        "roleId": 1,
+        "roleName": "超级管理员",
+        "Mid": 1,
+        "name": "系统总览",
+        "type": 1,
+        "icon": "icon",
+        "url": "",
+        "parentId": null
+    },
+    {
+        "roleId": 1,
+        "roleName": "超级管理员",
+        "Mid": 4,
+        "name": "三级目录",
+        "type": 2,
+        "icon": "icon",
+        "url": "/systemOverview/analyse/test3",
+        "parentId": 3
+    },
+    {
+        "roleId": 1,
+        "roleName": "超级管理员",
+        "Mid": 2,
+        "name": "人事管理",
+        "type": 2,
+        "icon": "icon",
+        "url": "/personManger/index",
+        "parentId": null
+    },
+    {
+        "roleId": 1,
+        "roleName": "超级管理员",
+        "Mid": 3,
+        "name": "系统统计",
+        "type": 1,
+        "icon": "icon",
+        "url": "",
+        "parentId": 1
+    },
+  
+]   
+function handelResult(result){
+            result.map(item=>{
+                if(item.type==1){
+                  let child =   result.find(item2=>item2.parentId==item.Mid)
+                  if(!item.children){
+                     item.children = []
+                  }
+                  item.children.push(child)
+                }
+            })
+            result.map((item,index)=>{
+                if(item.parentId != null ){
+                    result.splice(index,1)
+                }
+            })
+            return result
+            
+        }
+      let result2  =   handelResult(result)
+      console.log(result2);
+    </script>
+</body>
+</html>
